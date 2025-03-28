@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">timecaculator</string>
+    <string name="title_activity_main">timecaculator</string>
+    <string name="package_name">ionic.timecaculator</string>
+    <string name="custom_url_scheme">ionic.timecaculator</string>
+</resources>
