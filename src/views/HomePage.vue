@@ -1,19 +1,21 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Hiển thị thời gian</ion-title>
+      <ion-toolbar color="primary">
+        <ion-title>⏳ Hiển thị Thời Gian</ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content class="ion-padding">
-      <ion-button expand="full" @click="showCurrentTime">Xem thời gian</ion-button>
+    <ion-content class="ion-padding content-container">
+      <div class="button-container">
+        <ion-button expand="full" color="success" @click="showCurrentTime">📅 Xem Thời Gian</ion-button>
+      </div>
 
-      <ion-card v-if="currentTime">
+      <ion-card v-if="currentTime" class="time-card animate">
         <ion-card-content>
-          <p><strong>Thời gian hiện tại:</strong> {{ currentTime }}</p>
-          <ion-button expand="full" color="secondary" @click="shareTime">Chia sẻ</ion-button>
-          <ion-button expand="full" color="tertiary" @click="captureScreenshot">Chụp màn hình</ion-button>
+          <p class="time-text">🕒 <strong>Thời gian hiện tại:</strong> {{ currentTime }}</p>
+          <ion-button expand="full" color="secondary" @click="shareTime">📤 Chia sẻ</ion-button>
+          <ion-button expand="full" color="tertiary" @click="captureScreenshot">📸 Chụp màn hình</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-content>
@@ -32,30 +34,24 @@ import {
 
 const currentTime = ref<string | null>(null);
 
-// Lấy thời gian hiện tại
 const getCurrentTime = () => {
   const now = new Date();
   return now.toLocaleTimeString();
 };
 
-// Hiển thị thời gian & gửi thông báo
 const showCurrentTime = async () => {
   currentTime.value = getCurrentTime();
-
   await LocalNotifications.requestPermissions();
   await LocalNotifications.schedule({
-    notifications: [
-      {
-        id: 1,
-        title: "Thời gian hiện tại",
-        body: `Bây giờ là: ${currentTime.value}`,
-        schedule: { at: new Date(Date.now() + 1000) }
-      },
-    ],
+    notifications: [{
+      id: 1,
+      title: "Thời gian hiện tại",
+      body: `Bây giờ là: ${currentTime.value}`,
+      schedule: { at: new Date(Date.now() + 1000) }
+    }],
   });
 };
 
-// Chia sẻ thời gian hiện tại
 const shareTime = async () => {
   if (currentTime.value) {
     await Share.share({
@@ -67,7 +63,6 @@ const shareTime = async () => {
   }
 };
 
-// Chụp màn hình (Đã sửa lỗi)
 const captureScreenshot = async () => {
   try {
     const { uri } = await Screenshot.take();
@@ -79,20 +74,44 @@ const captureScreenshot = async () => {
 </script>
 
 <style scoped>
-ion-content {
+.content-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
+  background: linear-gradient(to bottom, #f0f8ff, #d1e7ff);
+}
+.button-container {
+  width: 90%;
+  display: flex;
+  justify-content: center;
 }
 ion-button {
+  font-size: 1.1rem;
+  font-weight: bold;
   margin-top: 20px;
-  width: 80%;
+  width: 90%;
+  transition: transform 0.2s ease;
 }
-ion-card {
-  margin-top: 20px;
-  width: 80%;
+ion-button:hover {
+  transform: scale(1.05);
+}
+.time-card {
+  margin-top: 30px;
+  width: 90%;
   text-align: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  animation: fadeIn 0.5s ease-in-out;
+}
+.time-text {
+  font-size: 1.2rem;
+  color: #333;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 </style>
