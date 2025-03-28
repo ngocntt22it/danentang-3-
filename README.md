@@ -30,7 +30,7 @@
 ### Thông báo trong ứng dụng:
 ![Thông báo ứng dụng](image-2.png)
 
-Sau khi tính toán, ứng dụng sẽ hiển thị thông báo ngay lập tức.
+Sau khi click "Xem thời gian", ứng dụng sẽ hiển thị thông báo ngay lập tức.
 
 
 ### Chia sẻ thông tin:
@@ -42,11 +42,12 @@ Có thể chia sẻ kết quả qua các nền tảng khác.
 ### Chụp màn hình ứng dụng:
 ![Chạy ứng dụng](image-4.png)
 
-Click vào chụp màn hình để chụp ảnh màn hình ứng dụng.
+Click vào "Chụp màn hình" để chụp ảnh màn hình ứng dụng.
 
 
 ### Chạy ứng dụng:
-![Chạy ứng dụng](image-4.png)
+![Chạy ứng dụng](image-5.png)
+
 Click vào build , sau khi build thành công thì click vào run trên android và chọn thiết bị để run.
 
 ---
